@@ -20,7 +20,9 @@ server.on('request', (req, res) => {
       case 'GET':
         if (fs.existsSync(filepath)) {
           const file = fs.createReadStream(filepath);
-          file.on('error', (e) => throw new Error(e.message));
+          file.on('error', (e) => {
+            throw new Error(e.message)
+          });
           file.pipe(res);
         } else {
           res.statusCode = 404;
